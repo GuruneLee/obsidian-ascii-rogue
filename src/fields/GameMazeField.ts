@@ -1,7 +1,7 @@
 // src/game/Game.ts
 import {Player} from 'src/entities/Player';
 import {Coordinate} from 'src/types/Coordinate';
-import {Maze} from 'src/entities/Maze';
+import {generateMaze, Maze} from 'src/entities/Maze';
 import {PlayerBehaviorResult} from 'src/types/PlayerBehaviorResult';
 
 export class GameMazeField {
@@ -10,26 +10,12 @@ export class GameMazeField {
 	playerMoveCount: number
 
 	initMap(wallHeight: number, wallWidth: number) {
-		this.maze = this.generateMaze(wallHeight, wallWidth);
+		this.maze = generateMaze(wallHeight, wallWidth, {coordX: 1, coordY: 1}, {
+			coordX: wallHeight - 2,
+			coordY: wallWidth - 2
+		});
 		this.player = new Player(this.maze.startCoord)
 		this.playerMoveCount = 0
-	}
-
-	private generateMaze(wallHeight: number, wallWidth: number): Maze {
-		const field = [
-			"##########",
-			"#........#",
-			"#.###.##.#",
-			"#...#..#.#",
-			"##.####.##",
-			"#........#",
-			"##########",
-		];
-
-		return new Maze(field, wallHeight, wallWidth,
-			{coordX: 1, coordY: 1},
-			{coordX: wallHeight - 2, coordY: wallWidth - 2}
-		);
 	}
 
 	movePlayer(dx: number, dy: number): PlayerBehaviorResult {
