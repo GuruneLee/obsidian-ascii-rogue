@@ -60,7 +60,6 @@ export function generateMaze(
 
 	if (oddFinish.coordX <= 0 || oddFinish.coordX >= height - 1 ||
 		oddFinish.coordY <= 0 || oddFinish.coordY >= width - 1) {
-		debugger
 		throw new Error(`Finish position out of bounds: (${oddFinish.coordX}, ${oddFinish.coordY})`);
 	}
 
