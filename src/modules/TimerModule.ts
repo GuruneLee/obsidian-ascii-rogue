@@ -1,5 +1,4 @@
-import {formatDuration, intervalToDuration} from "date-fns";
-import {ko} from "date-fns/locale";
+import {getDuration} from "src/util/DateTime";
 
 export class TimerModule {
 	startTime: Date
@@ -11,11 +10,14 @@ export class TimerModule {
 	}
 
 	getDuration(): string {
-		const duration = intervalToDuration({start: this.startTime, end: this.endTime});
+		return getDuration(this.startTime, this.endTime)
+	}
 
-		return formatDuration(duration, {
-			format: ['hours', 'minutes', 'seconds'],
-			locale: ko
-		});
+	getStartTime(): Date {
+		return this.startTime;
+	}
+
+	getEndTime(): Date {
+		return this.endTime;
 	}
 }
